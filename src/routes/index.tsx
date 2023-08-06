@@ -20,8 +20,6 @@ export const AppRoutes = () => {
     }
   }, [currentPath]);
 
-  console.log(useRoutes);
-
   const user = useUser();
 
   const routes = user.data ? protectedRoutes : privateRoutes;
@@ -29,5 +27,5 @@ export const AppRoutes = () => {
   const element = useRoutes([...routes, ...publicRoutes]);
   // const element = useRoutes([]);
 
-  return <>{element}</>;
+  return <div className="dark h-screen">{element}</div>;
 };

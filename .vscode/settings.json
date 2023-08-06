@@ -127,7 +127,8 @@
     ".git/objects",
     ".vscode",
     ".vscode-insiders",
-    ".eslintrc.js"
+    ".eslintrc.js",
+    "dark:text-white"
   ],
   "cSpell.ignoreWords": ["hachee"],
   "cSpell.words": ["datepicker", "heroicons", "languagedetector"]
