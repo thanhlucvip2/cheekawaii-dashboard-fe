@@ -1,4 +1,4 @@
-import { configureAuth } from 'react-query-auth';
+import { configureAuth } from "react-query-auth";
 
 import {
   loginWithEmailAndPassword,
@@ -7,8 +7,8 @@ import {
   UserResponse,
   LoginCredentialsDTO,
   RegisterCredentialsDTO,
-} from './auth-api';
-import cookie from 'src/utils/cookie';
+} from "./auth-api";
+import cookie from "src/utils/cookie";
 
 async function handleUserResponse(data: UserResponse) {
   const {
@@ -18,10 +18,13 @@ async function handleUserResponse(data: UserResponse) {
   return await getUser();
 }
 
+let userData: any = null;
 async function userFn() {
   if (cookie.getToken()) {
-    const data = await getUser();
-    return data;
+    if (userData === null) {
+      userData = await getUser();
+    }
+    return userData;
   }
 
   return null;

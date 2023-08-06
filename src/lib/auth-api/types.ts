@@ -1,8 +1,7 @@
 export type AuthUser = {
   id: string;
-  mailaddress: string;
-  username: string;
-  role: 'ADMIN' | 'USER';
+  email: string;
+  roleUser: "ADMIN" | "USER";
 };
 
 export type UserResponse = {

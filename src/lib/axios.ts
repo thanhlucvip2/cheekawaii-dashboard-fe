@@ -2,13 +2,8 @@ import Axios, { AxiosHeaders, AxiosRequestConfig } from "axios";
 
 // import { API_PATH, API_URL } from '@/config';
 // import { useNotificationStore } from '@/stores/notifications';
+import { API_URL } from "src/config";
 import cookie from "src/utils/cookie";
-
-export interface IApiResponse {
-  statusCode: number;
-  success: string;
-  data: [] | null;
-}
 
 function authRequestInterceptor(config: AxiosRequestConfig): any {
   const token = cookie.getToken();
@@ -20,7 +15,7 @@ function authRequestInterceptor(config: AxiosRequestConfig): any {
 }
 
 export const axios = Axios.create({
-  baseURL: `http://localhost:5000`,
+  baseURL: API_URL,
   headers: {
     "Content-Type": "application/json",
   },

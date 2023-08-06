@@ -9,8 +9,6 @@ import {
 } from "react-hook-form";
 import { ZodType } from "zod";
 
-import "./Form.scss";
-
 type FormProps<TFormValues extends FieldValues, Schema> = {
   onSubmit: SubmitHandler<TFormValues>;
   children: (methods: UseFormReturn<TFormValues>) => React.ReactNode;
