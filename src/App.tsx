@@ -4,7 +4,7 @@ import { AppProvider } from "./providers/app";
 
 function App() {
   return (
-    <div>
+    <div className="dark">
       <AppProvider>
         <AppRoutes />
       </AppProvider>

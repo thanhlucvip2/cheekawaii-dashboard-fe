@@ -3,6 +3,8 @@ import * as React from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { HelmetProvider } from "react-helmet-async";
 import { BrowserRouter as Router } from "react-router-dom";
+import { Loading } from "src/components/loading/loading";
+import { Spinner } from "src/components/loading/spinner";
 
 // import { Button, Spinner } from '@/components/Elements';
 // import { Notifications } from '@/components/Notifications/Notifications';
@@ -29,28 +31,24 @@ export const AppProvider = ({ children }: AppProviderProps) => {
   return (
     <React.Suspense
       fallback={
-        <div>
-          {/* <Spinner /> */}
-          loading
+        <div className="bg-gray-50 dark:bg-gray-900 h-screen w-screen">
+          <Spinner />
         </div>
       }
     >
       <ErrorBoundary FallbackComponent={ErrorFallback}>
         <HelmetProvider>
           <QueryClientProvider client={queryClient}>
-            {/* <Notifications /> */}
-            {/* <Spinner /> */}
+            <Loading />
             <AuthLoader
               renderLoading={() => (
                 <div>
-                  {/* <Spinner /> */}
-                  loading
+                  <Spinner />
                 </div>
               )}
             >
               <Router>{children}</Router>
             </AuthLoader>
-            {/* <Router>{children}</Router> */}
           </QueryClientProvider>
         </HelmetProvider>
       </ErrorBoundary>

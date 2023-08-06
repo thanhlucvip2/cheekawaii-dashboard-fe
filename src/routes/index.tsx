@@ -27,5 +27,5 @@ export const AppRoutes = () => {
   const element = useRoutes([...routes, ...publicRoutes]);
   // const element = useRoutes([]);
 
-  return <div className="dark h-screen">{element}</div>;
+  return <div className="h-screen">{element}</div>;
 };
