@@ -11,6 +11,5 @@ export const privateRoutes = [
     path: "/login",
     element: <Login />,
   },
-
   { path: "/", element: <Navigate to="/login" /> },
 ];
