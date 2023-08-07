@@ -9,7 +9,7 @@ export const Dashboard = () => {
           addNotification({ message: "dasdas", type: "error" });
         }}
       >
-        add
+        daslkd;laskdl;askdl;akdl;akl;dkal;dkalskd; add
       </button>
     </>
   );
