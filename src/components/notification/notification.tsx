@@ -86,7 +86,7 @@ const NotificationItem = (
           <span className="sr-only">Warning icon</span>
         </div>
       )}
-      <div className="ml-3 text-sm font-normal">{item.id}</div>
+      <div className="ml-3 text-sm font-normal">{item.message}</div>
       <button
         onClick={() => item.onClose()}
         type="button"

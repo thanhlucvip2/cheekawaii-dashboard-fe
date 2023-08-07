@@ -9,8 +9,10 @@ import { LoginValues } from "../types";
 import "./Login.scss";
 import { useLogin } from "src/lib/auth";
 import { useNavigate } from "react-router-dom";
+import { useNotification } from "src/hooks/useNotification";
 
 export const Login = () => {
+  const { addNotification } = useNotification();
   const { setLoading } = useLoading();
   const navigate = useNavigate();
   const login = useLogin();
@@ -58,8 +60,16 @@ export const Login = () => {
                   .mutateAsync(values)
                   .then(() => {
                     navigate(`/`);
+                    addNotification({
+                      message: "Đăng nhập thành công!",
+                      type: "success",
+                    });
                   })
                   .catch(() => {
+                    addNotification({
+                      message: "Tài khoản mật khẩu không chính xác!",
+                      type: "error",
+                    });
                     setLoading(false);
                   });
               }}
