@@ -19,6 +19,7 @@ module.exports = {
           950: "#172554",
         },
         main: "#0F0E0F",
+        main2: "#1b1a1b",
       },
     },
     fontFamily: {
@@ -60,4 +61,3 @@ module.exports = {
   },
   plugins: [require("flowbite/plugin")],
 };
-// #1b1a1b
