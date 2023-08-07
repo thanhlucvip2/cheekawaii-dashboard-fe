@@ -5,6 +5,7 @@ import { HelmetProvider } from "react-helmet-async";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Loading } from "src/components/loading/loading";
 import { Spinner } from "src/components/loading/spinner";
+import { Notification } from "src/components/notification/notification";
 
 // import { Button, Spinner } from '@/components/Elements';
 // import { Notifications } from '@/components/Notifications/Notifications';
@@ -40,6 +41,7 @@ export const AppProvider = ({ children }: AppProviderProps) => {
         <HelmetProvider>
           <QueryClientProvider client={queryClient}>
             <Loading />
+            <Notification />
             <AuthLoader
               renderLoading={() => (
                 <div>
