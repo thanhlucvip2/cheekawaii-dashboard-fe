@@ -1,11 +1,50 @@
+import { NotificationType, useNotification } from "src/hooks/useNotification";
+import "./notification.scss";
+import { useEffect } from "react";
+
 export const Notification = () => {
+  const { notifications, dismissNotification } = useNotification();
+
   return (
-    <div className="fixed z-10 right-[10px] top-[75px] sm:top-[65px]">
-      <div
-        id="toast-success"
-        className="border flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800"
-        role="alert"
-      >
+    <div className="fixed z-10 right-[10px] bottom-5 -mr-1">
+      {notifications.map((item) => {
+        return (
+          <NotificationItem
+            key={item.id}
+            message={item.message}
+            type={item.type}
+            duration={item.duration}
+            id={item.id}
+            onClose={() => dismissNotification(item.id!)}
+          />
+        );
+      })}
+    </div>
+  );
+};
+
+const NotificationItem = (
+  item: NotificationType & {
+    onClose: () => void;
+  }
+) => {
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      item.onClose();
+    }, item.duration);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
+
+  return (
+    <div
+      id={item.id}
+      className="border min-w-[250px] flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800"
+      role="alert"
+    >
+      {item.type === "success" && (
         <div className="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
           <svg
             className="w-5 h-5"
@@ -18,36 +57,8 @@ export const Notification = () => {
           </svg>
           <span className="sr-only">Check icon</span>
         </div>
-        <div className="ml-3 text-sm font-normal">Item moved successfully.</div>
-        <button
-          type="button"
-          className="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
-          data-dismiss-target="#toast-success"
-          aria-label="Close"
-        >
-          <span className="sr-only">Close</span>
-          <svg
-            className="w-3 h-3"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 14 14"
-          >
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-            />
-          </svg>
-        </button>
-      </div>
-      <div
-        id="toast-danger"
-        className="border flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800"
-        role="alert"
-      >
+      )}
+      {item.type === "error" && (
         <div className="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg dark:bg-red-800 dark:text-red-200">
           <svg
             className="w-5 h-5"
@@ -60,36 +71,8 @@ export const Notification = () => {
           </svg>
           <span className="sr-only">Error icon</span>
         </div>
-        <div className="ml-3 text-sm font-normal">Item has been deleted.</div>
-        <button
-          type="button"
-          className="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
-          data-dismiss-target="#toast-danger"
-          aria-label="Close"
-        >
-          <span className="sr-only">Close</span>
-          <svg
-            className="w-3 h-3"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 14 14"
-          >
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-            />
-          </svg>
-        </button>
-      </div>
-      <div
-        id="toast-warning"
-        className="border flex items-center w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800"
-        role="alert"
-      >
+      )}
+      {item.type === "warning" && (
         <div className="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-orange-500 bg-orange-100 rounded-lg dark:bg-orange-700 dark:text-orange-200">
           <svg
             className="w-5 h-5"
@@ -102,33 +85,32 @@ export const Notification = () => {
           </svg>
           <span className="sr-only">Warning icon</span>
         </div>
-        <div className="ml-3 text-sm font-normal">
-          Improve password difficulty.
-        </div>
-        <button
-          type="button"
-          className="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
-          data-dismiss-target="#toast-warning"
-          aria-label="Close"
+      )}
+      <div className="ml-3 text-sm font-normal">{item.id}</div>
+      <button
+        onClick={() => item.onClose()}
+        type="button"
+        className="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
+        data-dismiss-target="#toast-success"
+        aria-label="Close"
+      >
+        <span className="sr-only">Close</span>
+        <svg
+          className="w-3 h-3"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 14 14"
         >
-          <span className="sr-only">Close</span>
-          <svg
-            className="w-3 h-3"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 14 14"
-          >
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-            />
-          </svg>
-        </button>
-      </div>
+          <path
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+          />
+        </svg>
+      </button>
     </div>
   );
 };
