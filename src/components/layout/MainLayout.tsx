@@ -1,5 +1,5 @@
 import { ReactNode, useState } from "react";
-import { Sidebar } from "./Sidebar";
+import { SidebarApp } from "./SidebarApp";
 import { Header } from "./Header";
 export type MainLayoutProps = {
   children: ReactNode;
@@ -9,7 +9,7 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
   return (
     <div>
       <Header onOpenSidebar={() => setIsShowSidebar(!isShowSidebar)} />
-      <Sidebar
+      <SidebarApp
         isShowSidebar={isShowSidebar}
         onClose={() => setIsShowSidebar(false)}
       />

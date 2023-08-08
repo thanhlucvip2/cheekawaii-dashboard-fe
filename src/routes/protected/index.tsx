@@ -26,6 +26,19 @@ export const protectedRoutes = [
     children: [
       { path: ROUTES.PROTECTED.HOME.INDEX, element: <Home /> },
       { path: ROUTES.PROTECTED.FILE_DRIVER.INDEX, element: <Home /> },
+      {
+        path: ROUTES.PROTECTED.FILE_DRIVER.INDEX,
+        children: [
+          {
+            path: ROUTES.PROTECTED.FILE_DRIVER.DRIVER,
+            element: <div>tes</div>,
+          },
+          {
+            path: ROUTES.PROTECTED.FILE_DRIVER.UPLOAD,
+            element: <Home />,
+          },
+        ],
+      },
     ],
   },
   {

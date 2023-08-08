@@ -1,5 +1,8 @@
 import { configureAuth } from "react-query-auth";
 
+import cookie from "src/utils/cookie";
+import { useProfile } from "src/hooks/useProfile";
+
 import {
   loginWithEmailAndPassword,
   getUser,
@@ -8,7 +11,6 @@ import {
   LoginCredentialsDTO,
   RegisterCredentialsDTO,
 } from "./auth-api";
-import cookie from "src/utils/cookie";
 
 async function handleUserResponse(data: UserResponse) {
   const {
@@ -24,6 +26,9 @@ async function userFn() {
     if (userData === null) {
       userData = await getUser();
     }
+    useProfile.setState({
+      userProfile: userData,
+    });
     return userData;
   }
 
