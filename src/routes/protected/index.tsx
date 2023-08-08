@@ -5,8 +5,9 @@ import { lazyImport } from "src/utils/lazyImport";
 import { MainLayout } from "src/components/layout/MainLayout";
 
 import "./style.scss";
+import { ROUTES } from "src/utils/constants";
 
-const { Dashboard } = lazyImport(() => import("src/pages/Home/"), "Dashboard");
+const { Home } = lazyImport(() => import("src/pages/Home/"), "Home");
 
 const App = () => {
   return (
@@ -22,7 +23,13 @@ export const protectedRoutes = [
   {
     path: "",
     element: <App />,
-    children: [{ path: "/", element: <Dashboard /> }],
+    children: [
+      { path: ROUTES.PROTECTED.HOME.INDEX, element: <Home /> },
+      { path: ROUTES.PROTECTED.FILE_DRIVER.INDEX, element: <Home /> },
+    ],
   },
-  { path: "/login", element: <Navigate to="/" /> },
+  {
+    path: ROUTES.PRIVATE.LOGIN.INDEX,
+    element: <Navigate to={ROUTES.PROTECTED.HOME.INDEX} />,
+  },
 ];

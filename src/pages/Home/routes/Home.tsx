@@ -1,6 +1,6 @@
 import { useNotification } from "src/hooks/useNotification";
 
-export const Dashboard = () => {
+export const Home = () => {
   const { addNotification } = useNotification();
   return (
     <>
@@ -9,7 +9,7 @@ export const Dashboard = () => {
           addNotification({ message: "dasdas", type: "error" });
         }}
       >
-        daslkd;laskdl;askdl;akdl;akl;dkal;dkalskd; add
+        ss
       </button>
     </>
   );
