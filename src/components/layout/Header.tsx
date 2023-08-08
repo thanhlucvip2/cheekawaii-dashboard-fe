@@ -1,7 +1,11 @@
+import clsx from "clsx";
+import { useState } from "react";
+
 type HeaderProps = {
   onOpenSidebar: () => void;
 };
 export const Header = (props: HeaderProps) => {
+  const [isShowMenuProfile, setIsShowMenuProfile] = useState(false);
   return (
     <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-main2 dark:border-gray-700">
       <div className="px-3 py-3 lg:px-5 lg:pl-3">
@@ -45,6 +49,7 @@ export const Header = (props: HeaderProps) => {
             <div className="flex items-center ml-3">
               <div>
                 <button
+                  onClick={() => setIsShowMenuProfile(!isShowMenuProfile)}
                   type="button"
                   className="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
                   aria-expanded="false"
@@ -59,7 +64,10 @@ export const Header = (props: HeaderProps) => {
                 </button>
               </div>
               <div
-                className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
+                className={clsx(
+                  "z-50 absolute top-10 right-1 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600",
+                  isShowMenuProfile ? "block" : "hidden"
+                )}
                 id="dropdown-user"
               >
                 <div className="px-4 py-3" role="none">
