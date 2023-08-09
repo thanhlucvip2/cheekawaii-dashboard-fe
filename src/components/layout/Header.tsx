@@ -1,11 +1,21 @@
 import clsx from "clsx";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useProfile } from "src/hooks/useProfile";
+import { useLogout } from "src/lib/auth";
 
 type HeaderProps = {
   onOpenSidebar: () => void;
 };
 export const Header = (props: HeaderProps) => {
+  const { userProfile } = useProfile();
   const [isShowMenuProfile, setIsShowMenuProfile] = useState(false);
+  const logout = useLogout();
+
+  const onLogout = () => {
+    logout.mutate({});
+    setIsShowMenuProfile(!isShowMenuProfile);
+  };
   return (
     <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-main2 dark:border-gray-700">
       <div className="px-3 py-3 lg:px-5 lg:pl-3">
@@ -65,7 +75,7 @@ export const Header = (props: HeaderProps) => {
               </div>
               <div
                 className={clsx(
-                  "z-50 absolute top-10 right-1 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600",
+                  "z-50 absolute top-[53px] sm:top-11 right-1 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600",
                   isShowMenuProfile ? "block" : "hidden"
                 )}
                 id="dropdown-user"
@@ -75,51 +85,35 @@ export const Header = (props: HeaderProps) => {
                     className="text-sm text-gray-900 dark:text-white"
                     role="none"
                   >
-                    Neil Sims
+                    {userProfile?.fullName}
                   </p>
                   <p
                     className="text-sm font-medium text-gray-900 truncate dark:text-gray-300"
                     role="none"
                   >
-                    neil.sims@flowbite.com
+                    {userProfile?.email}
                   </p>
                 </div>
                 <ul className="py-1" role="none">
                   <li>
-                    <a
-                      href="#"
+                    <Link
+                      onClick={() => setIsShowMenuProfile(!isShowMenuProfile)}
+                      to="/"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                       role="menuitem"
                     >
-                      Dashboard
-                    </a>
+                      Cài đặt tài khoản
+                    </Link>
                   </li>
                   <li>
-                    <a
-                      href="#"
+                    <Link
+                      onClick={onLogout}
+                      to="/"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                       role="menuitem"
                     >
-                      Settings
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                      role="menuitem"
-                    >
-                      Earnings
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                      role="menuitem"
-                    >
-                      Sign out
-                    </a>
+                      Đăng xuất
+                    </Link>
                   </li>
                 </ul>
               </div>
