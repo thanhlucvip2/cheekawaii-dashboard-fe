@@ -10,3 +10,22 @@ export type Sidebar = {
   CHILDREN?: Sidebar[];
   IS_SHOW_MENU?: boolean;
 };
+
+export type ResponseData<T> = {
+  data: T[];
+  statusCode: number;
+  success: string;
+  metaData: {
+    limit: number;
+    page: number;
+    total: number;
+  };
+};
+
+export type ResponseDetailData<T> = {
+  data: T;
+  statusCode: number;
+  success: string;
+};
+
+export type TypeFile = "FILE" | "FOLDER"
