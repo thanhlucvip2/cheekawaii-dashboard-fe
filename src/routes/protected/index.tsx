@@ -25,24 +25,24 @@ export const protectedRoutes = [
     element: <App />,
     children: [
       { path: ROUTES.PROTECTED.HOME.INDEX, element: <Home /> },
-      { path: ROUTES.PROTECTED.FILE_DRIVER.INDEX, element: <Home /> },
       {
         path: ROUTES.PROTECTED.FILE_DRIVER.INDEX,
         children: [
           {
             path: ROUTES.PROTECTED.FILE_DRIVER.DRIVER,
-            element: <div>tes</div>,
+            element: <div>filedriver</div>,
           },
           {
             path: ROUTES.PROTECTED.FILE_DRIVER.UPLOAD,
-            element: <Home />,
+            element: <div>upload file</div>,
           },
         ],
       },
+      { path: ROUTES.PROTECTED.DASHBOARD.INDEX, element: <div>dashboard</div> },
     ],
   },
   {
     path: ROUTES.PRIVATE.LOGIN.INDEX,
-    element: <Navigate to={ROUTES.PROTECTED.HOME.INDEX} />,
+    element: <Navigate to={`/${ROUTES.PROTECTED.HOME.INDEX}`} />,
   },
 ];

@@ -114,6 +114,7 @@ export const SidebarApp = (props: SidebarProps) => {
                                   item2.ROLE === userProfile?.roleUser) ? (
                                   <li>
                                     <Link
+                                      onClick={props.onClose}
                                       to={`${item.ROUTES}/${item2.ROUTES}`}
                                       className={clsx(
                                         "flex items-center w-auto p-2 text-gray-900 transition duration-75 rounded-lg pl-3 ml-9 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700",
@@ -136,6 +137,7 @@ export const SidebarApp = (props: SidebarProps) => {
                       </>
                     ) : (
                       <Link
+                        onClick={props.onClose}
                         to={item.ROUTES}
                         className={clsx(
                           "flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group",

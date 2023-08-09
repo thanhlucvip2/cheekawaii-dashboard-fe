@@ -61,10 +61,4 @@ export const SIDE_BAR: Sidebar[] = [
     ROLE: ROLES.ADMIN as Roles,
     ROUTES: ROUTES.PROTECTED.DASHBOARD.INDEX,
   },
-  {
-    LABEL: "Profile",
-    ICON: "",
-    ROLE: ROLES.USER as Roles,
-    ROUTES: ROUTES.PROTECTED.DASHBOARD.INDEX,
-  },
 ];
